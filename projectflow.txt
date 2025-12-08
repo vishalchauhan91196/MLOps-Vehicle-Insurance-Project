@@ -18,3 +18,8 @@
 5. Create file "mongoDB.ipynb" in notebook >> select kernal>python kernal>vehicle>>
 6. Push your data to mongoDB database from the python notebook.
 7. Go to mongoDB Atlas >> Database >> browse collection >> see the data in key value format.
+
+-------------------------------------- logging, exception and notebooks --------------------------------------
+1. Write the logger file and test it on demo.py
+2. Write the exception file and test it on demo.py
+3. Create "exp-notebook.ipynb" in notebook.
