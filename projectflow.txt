@@ -1,1 +1,20 @@
+----------------------------------------------- Folder Structure Setup -----------------------------------------------
 1. Create project template by executing template.py
+2. Add code for setup.py and pyproject.toml to import local packages.
+3. Add code for requirements.txt | Add "-e ." in the last to trigger setup.py | 'setup.py' makes all the modules and functions inside src available outside it including to the venv. | It makes src as a package and installs it.
+4. Create a venv 
+    python -m venv vehicle
+    vehicle\Scripts\activate
+5. pip install -r requirements.txt
+6. pip list
+
+
+----------------------------------------------- MongoDB Setup -----------------------------------------------
+1. Create a new project in MongoDB Atlas & deploy a cluster.
+2. Setup the username and password and then create DB user.
+3. Go to "Database & network access" and add ip address - "0.0.0.0/0" so that we can access it from anywhere
+4. Project >> "Get Connection String" >> "Drivers" >> {Driver:Python, Version:3.12 or later} 
+   >> mongodb+srv://<userName>:<Password>@vehicle-insurance.vvxnjdu.mongodb.net/?appName=Vehicle-Insurance
+5. Create file "mongoDB.ipynb" in notebook >> select kernal>python kernal>vehicle>>
+6. Push your data to mongoDB database from the python notebook.
+7. Go to mongoDB Atlas >> Database >> browse collection >> see the data in key value format.
