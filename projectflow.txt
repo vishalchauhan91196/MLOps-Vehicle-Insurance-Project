@@ -19,7 +19,30 @@
 6. Push your data to mongoDB database from the python notebook.
 7. Go to mongoDB Atlas >> Database >> browse collection >> see the data in key value format.
 
+
 -------------------------------------- logging, exception and notebooks --------------------------------------
 1. Write the logger file and test it on demo.py
 2. Write the exception file and test it on demo.py
 3. Create "exp-notebook.ipynb" in notebook.
+
+
+----------------------------------------------- File Setup -----------------------------------------------
+1. Declare variables within constants/__init__.py file
+2. Add code to configuration/mongo_db_connections.py
+3. Add code to data_access/vehicle_data.py that will use mongo_db_connections.py to connect with DB, fetch data in key-val format and transform that to df.
+4. Add code to entity/config_entity.py file till DataIngestionConfig class.
+5. Add code to entity/artifact_entity.py file till DataIngestionArtifact class.
+
+
+----------------------------------------------- Data Ingestion -----------------------------------------------
+1. Add code to components/data_ingestion.py file.
+2. Add code to pipeline/training_pipeline.py
+3. Set mongodb connection url first as an env variable.
+                        *** For Bash ***
+    export MONGODB_URL="mongodb+srv://<username>:<password>......"
+    echo $MONGODB_URL
+                        *** For Powershell ***
+    $env:MONGODB_URL = "mongodb+srv://<username>:<password>......"
+    echo $env:MONGODB_URL
+4. Run demo.py
+5. Add "artifact" dir to .gitignore file
