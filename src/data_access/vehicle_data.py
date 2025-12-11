@@ -4,8 +4,9 @@ import numpy as np
 from typing import Optional
 
 from src.exception import MyException
-from src. constants import DATABASE_NAME
-from src. configuration import MongoDBClient
+from src.logger import logging
+from src.constants import DATABASE_NAME
+from src.configuration.mongo_db_connection import MongoDBClient
 
 class VehicleData:
     """  Class to export the data fetched from MongoDB to a Pandas DataFrame.  """
@@ -28,9 +29,9 @@ class VehicleData:
                 collection = self.mongoclient[database_name][collection_name]
 
             # Convert collection data to DataFrame and preprocess
-            print("Fetching data from mongoDB")
+            logging.info("Fetching data from mongoDB")
             df = pd.DataFrame(list(collection.find()))
-            print(f"Data fecthed with len: {len(df)}")
+            logging.info(f"Data fecthed with len: {len(df)}")
             if "id" in df.columns:
                 df.drop(columns=["id"], errors="ignore")
             df.replace({"na": np.nan}, inplace=True)

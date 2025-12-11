@@ -46,3 +46,9 @@
     echo $env:MONGODB_URL
 4. Run demo.py
 5. Add "artifact" dir to .gitignore file
+
+
+---------------------------- Data Validation, Data Transformation & Model Trainer ----------------------------
+
+1. Add code to utils/main_utils.py and config/schema.yaml file.
+2. Add "Data Validation" component the same way done for Data Ingestion.

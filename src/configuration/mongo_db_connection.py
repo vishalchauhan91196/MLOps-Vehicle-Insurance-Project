@@ -20,18 +20,19 @@ class MongoDBClient:
         """  Initializes a connection to the MongoDB database. If no existing connection is found, it establishes a new one.  """
         try:
             # Check if no MongoDB client connection has been established
+            logging.info("----------Initiating MongoDB connection---------------")
             if MongoDBClient.client is None:
                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
                 if mongo_db_url is None:
                     raise Exception(f'Environment Variable {MONGODB_URL_KEY} is not set.')
                 
                 # Establish a new MongoDB client connection
-                MongoDBClient.client = pymongo.MongoDBClient(mongo_db_url, tlsCAFile=ca)
+                MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
 
             self.client = MongoDBClient.client
-            self.data_base = self.client[database_name]
+            self.database = self.client[database_name]
             self.database_name = database_name
-            logging.info("MongoDB connection successful.")
+            logging.info("----------MongoDB connection successful---------------")
 
         except Exception as e:
-            raise MyException(e, sys)        
+            raise MyException(e, sys)
