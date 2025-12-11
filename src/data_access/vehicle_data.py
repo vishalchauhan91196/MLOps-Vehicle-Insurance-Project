@@ -32,8 +32,8 @@ class VehicleData:
             logging.info("Fetching data from mongoDB")
             df = pd.DataFrame(list(collection.find()))
             logging.info(f"Data fecthed with len: {len(df)}")
-            if "id" in df.columns:
-                df.drop(columns=["id"], errors="ignore")
+            if "id" in df.columns.to_list():
+                df = df.drop(columns=["id"], axis=1)
             df.replace({"na": np.nan}, inplace=True)
 
             return df
