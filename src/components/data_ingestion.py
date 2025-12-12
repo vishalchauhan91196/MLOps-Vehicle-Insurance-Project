@@ -61,7 +61,7 @@ class DataIngestion():
         """ Output : train set and test set are returned as the artifacts of data ingestion components. """
 
         try:
-            logging.info("Starting data ingestion")
+            logging.info("****Starting data ingestion****")
             df = self.export_data_into_feature_store()
             self.train_test_split_data(df)
 

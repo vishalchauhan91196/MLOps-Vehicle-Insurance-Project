@@ -52,3 +52,5 @@
 
 1. Add code to utils/main_utils.py and config/schema.yaml file.
 2. Add "Data Validation" component the same way done for Data Ingestion.
+3. Add "Data Transformation" component.
+4. Add "Model Trainer" component.

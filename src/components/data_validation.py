@@ -73,7 +73,7 @@ class DataValidation:
         """ This method initiates the data validation component for the pipeline. """
         try:
             validation_error_msg = ""
-            logging.info("Starting data validation")
+            logging.info("****Starting data validation****")
             train_df, test_df = (DataValidation.read_data(file_path=self.data_ingestion_artifact.trained_file_path), DataValidation.read_data(file_path=self.data_ingestion_artifact.test_file_path))
 
             # Checking column length of dataframe for train/test df
