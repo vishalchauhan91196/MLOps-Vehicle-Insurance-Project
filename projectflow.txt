@@ -14,7 +14,7 @@
 2. Setup the username and password and then create DB user.
 3. Go to "Database & network access" and add ip address - "0.0.0.0/0" so that we can access it from anywhere
 4. Project >> "Get Connection String" >> "Drivers" >> {Driver:Python, Version:3.12 or later} 
-   >> mongodb+srv://<userName>:<Password>@vehicle-insurance.vvxnjdu.mongodb.net/?appName=Vehicle-Insurance
+   >> mongodb+srv://<userName>:<Password>@vehicle-insurance.vvxnjdu.mongodb.net/?retryWrites=true&w=majority&appName=Vehicle-Insurance"
 5. Create file "mongoDB.ipynb" in notebook >> select kernal>python kernal>vehicle>>
 6. Push your data to mongoDB database from the python notebook.
 7. Go to mongoDB Atlas >> Database >> browse collection >> see the data in key value format.
@@ -54,3 +54,32 @@
 2. Add "Data Validation" component the same way done for Data Ingestion.
 3. Add "Data Transformation" component.
 4. Add "Model Trainer" component.
+
+
+----------------------------------------  Setup AWS S3 stuff  -------------------------------------------------
+
+1. Set env variables for connection with AWS.
+                        *** For Bash ***
+    export AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
+    export AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
+
+    echo $AWS_ACCESS_KEY_ID
+    echo $AWS_SECRET_ACCESS_KEY
+
+                        *** For Powershell ***
+    $env:AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
+    $env:AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
+
+    echo $env:AWS_ACCESS_KEY_ID
+    echo $env:AWS_SECRET_ACCESS_KEY
+
+2. Add code to src/configuration/aws_connection.py file (To work with AWS S3 service).
+3. Create an S3 bucket ("mlops-vehicle-insurance").
+4. Add code to src/cloud_storage/aws_storage.py file.
+5. Add code to src/entity/s3_estimator.py file.
+
+
+----------------------------  Model Evaluation & Model Pusher  -----------------------------------------------
+
+1. Add "Model Evaluation" component.
+2. Add "Model Pusher" component.

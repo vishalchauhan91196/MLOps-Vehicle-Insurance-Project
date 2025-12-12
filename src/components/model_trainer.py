@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 
 from src.exception import MyException
 from src.logger import logging
+from src.entity.estimator import MyModel
 from src.utils.main_utils import load_numpy_array_data, load_object, save_object
 from src.entity.config_entity import ModelTrainerConfig
 from src.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, ClassificationMetricArtifact
@@ -55,7 +56,7 @@ class ModelTrainer:
             return model, metric_artifact
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
@@ -82,10 +83,11 @@ class ModelTrainer:
                 logging.info("No model found with score above the base score")
                 raise Exception("No model found with score above the base score")
 
-            # Save the final model object
+            # Save the final model object that includes both preprocessing and the trained model
             logging.info("Saving new model as performace is better than previous one.")
-            save_object(self.model_trainer_config.trained_model_file_path, trained_model)
-            logging.info("Saved final model object")    
+            my_model = MyModel(preprocessing_object=preprocessing_obj, trained_model_object=trained_model)
+            save_object(self.model_trainer_config.trained_model_file_path, my_model)
+            logging.info("Saved final model object that includes both preprocessing and the trained model")  
 
             # Create and return the ModelTrainerArtifact
             model_trainer_artifact = ModelTrainerArtifact(
@@ -97,4 +99,4 @@ class ModelTrainer:
             return model_trainer_artifact
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e

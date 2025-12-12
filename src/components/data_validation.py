@@ -21,7 +21,7 @@ class DataValidation:
             self._schema_config = read_yaml_file(SCHEMA_FILE_PATH)
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def validate_number_of_columns(self, df: DataFrame) -> bool:
@@ -32,7 +32,7 @@ class DataValidation:
             return status
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def is_column_exist(self, df: DataFrame) -> bool:
@@ -58,7 +58,7 @@ class DataValidation:
             return false if len(missing_numerical_columns) > 0 or len(missing_categorical_columns) > 0 else True
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     @staticmethod
@@ -66,7 +66,7 @@ class DataValidation:
         try:
             return pd.read_csv(file_path)
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def initiate_data_validation(self) -> DataValidationArtifact:
@@ -132,4 +132,4 @@ class DataValidation:
             return data_validation_artifact    
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e

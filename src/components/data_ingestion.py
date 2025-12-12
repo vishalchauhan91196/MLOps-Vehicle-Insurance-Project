@@ -17,7 +17,7 @@ class DataIngestion():
             self.data_ingestion_config = data_ingestion_config
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def export_data_into_feature_store(self) -> DataFrame:
@@ -37,7 +37,7 @@ class DataIngestion():
             return df
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
 
     def train_test_split_data(self, df: DataFrame) -> None:
@@ -54,7 +54,7 @@ class DataIngestion():
             logging.info(f"Exported train and test file path.")
 
         except Exception as e:
-            raise MyException(e, sys)     
+            raise MyException(e, sys) from e     
 
 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
@@ -72,4 +72,4 @@ class DataIngestion():
             return data_ingestion_artifact
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e

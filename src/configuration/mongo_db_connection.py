@@ -35,4 +35,4 @@ class MongoDBClient:
             logging.info("----------MongoDB connection successful---------------")
 
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e

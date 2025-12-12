@@ -17,7 +17,7 @@ class VehicleData:
             self.mongoclient = MongoDBClient(database_name = DATABASE_NAME)
             
         except Exception as e:
-            raise MyException(e, sys)
+            raise MyException(e, sys) from e
 
     def export_collection_as_dataframe(self, collection_name: str, database_name: Optional[str] = None) -> pd.DataFrame:
         """  Exports an entire MongoDB collection as a pandas DataFrame.  """
@@ -39,4 +39,4 @@ class VehicleData:
             return df
 
         except Exception as e:
-            raise MyException(e, sys)      
+            raise MyException(e, sys) from e      
