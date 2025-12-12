@@ -40,7 +40,6 @@ list_of_files = [
     "demo.py",
     "setup.py",
     "pyproject.toml",
-    "config/model.yaml",
     "config/schema.yaml",
 ]
 

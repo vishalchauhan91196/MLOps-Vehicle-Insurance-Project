@@ -168,6 +168,7 @@ class DataTransformation:
         Initiates the data transformation component for the pipeline.
         """
         try:
+            print("------------------------------------------------------------------------------------------------")
             logging.info("****Starting Data Transformation****")
 
             if not self.data_validation_artifact.validation_status:
