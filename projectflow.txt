@@ -5,7 +5,7 @@
 4. Create a venv 
     python -m venv vehicle
     vehicle\Scripts\activate
-5. pip install -r requirements.txt
+5. pip install -r requirements.txt | It installs all dependencies. The pyproject.toml file reference it so that package dependencies are automatically pulled from there.
 6. pip list
 
 
@@ -83,3 +83,9 @@
 
 1. Add "Model Evaluation" component.
 2. Add "Model Pusher" component.
+
+
+------------------------------------------  Setup Application  -----------------------------------------------
+
+1. Add code to pipeline/prediction_pipeline.py
+2. Add code to app.py
