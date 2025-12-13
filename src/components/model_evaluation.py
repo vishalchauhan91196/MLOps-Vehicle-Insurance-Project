@@ -13,6 +13,14 @@ from src.utils.main_utils import load_object
 from src.entity.s3_estimator import VehicleDataEstimator
 
 
+@dataclass
+class EvaluateModelResponse:
+    trained_model_f1_score: float
+    best_model_f1_score: float
+    is_model_accepted: bool
+    difference: float
+
+
 class ModelEvaluation:
 
     def __init__(self, model_eval_config: ModelEvaluationConfig, data_ingestion_artifact: DataIngestionArtifact,
@@ -80,7 +88,7 @@ class ModelEvaluation:
         return df
 
 
-    def evaluate_model(self):
+    def evaluate_model(self) -> EvaluateModelResponse:
         """ This function is used to evaluate trained model with production model (S3) and choose best model. """
         try:
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
@@ -101,6 +109,20 @@ class ModelEvaluation:
 
             best_model_f1_score=None
             best_model = self.get_best_model()
+            if best_model is not None:
+                logging.info(f"Computing F1_Score for production model..")
+                y_hat_best_model = best_model.predict(x)
+                best_model_f1_score = f1_score(y, y_hat_best_model)
+                logging.info(f"F1_Score-Production Model: {best_model_f1_score}, F1_Score-New Trained Model: {trained_model_f1_score}")
+
+            tmp_best_model_score = 0 if best_model_f1_score is None else best_model_f1_score
+            result = EvaluateModelResponse(trained_model_f1_score=trained_model_f1_score,
+                                           best_model_f1_score=best_model_f1_score,
+                                           is_model_accepted=trained_model_f1_score > tmp_best_model_score,
+                                           difference=trained_model_f1_score - tmp_best_model_score
+                                           )
+            logging.info(f"Result: {result}")
+            return result    
 
         except Exception as e:
             raise MyException(e, sys)                
