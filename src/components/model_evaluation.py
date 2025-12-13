@@ -82,9 +82,8 @@ class ModelEvaluation:
     def _drop_id_column(self, df):
         """Drop the 'id' column if it exists."""
         logging.info("Dropping 'id' column")
-        drop_col = self._schema_config['drop_columns']
-        if drop_col in df.columns:
-            df = df.drop(drop_col, axis=1)
+        if "_id" in df.columns:
+            df = df.drop("_id", axis=1)
         return df
 
 
@@ -125,4 +124,26 @@ class ModelEvaluation:
             return result    
 
         except Exception as e:
-            raise MyException(e, sys)                
+            raise MyException(e, sys) from e
+
+
+    def initiate_model_evaluation(self) -> ModelEvaluationArtifact:
+        try:
+            print("------------------------------------------------------------------------------------------------")
+            logging.info("****Starting Model Evaluation****")
+
+            evaluate_model_response = self.evaluate_model()
+
+            model_evaluation_artifact = ModelEvaluationArtifact(
+                is_model_accepted  = evaluate_model_response.is_model_accepted,
+                changed_accuracy   = evaluate_model_response.difference,
+                s3_model_path      = self.model_eval_config.s3_model_key_path,
+                trained_model_path = self.model_trainer_artifact.trained_model_file_path   
+            )
+
+            logging.info(f"Model evaluation artifact: {model_evaluation_artifact}")
+
+            return model_evaluation_artifact
+
+        except Exception as e:
+            raise MyException(e, sys) from e
